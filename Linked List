@@ -1,0 +1,125 @@
+public class List {
+    Node head;
+
+    class Node {
+        int data;
+        Node next;
+
+        Node(int x) {
+            data = x;
+            next = null;
+        }
+    }
+        public void addFirst(int x) {
+            Node n1 = new Node(x);
+            if (head == null) {
+                head = n1;
+                return;
+            }
+            n1.next = head;
+            head = n1;
+        }
+        public void addLast(int x){
+        Node n2=new Node(x);
+        if(head==null){
+            head=n2;
+            return;
+        }
+        Node temp=head;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=n2;
+        }
+        public void display(){
+            if(head==null){
+                System.out.println("list is empty");
+                return;
+            }
+            Node temp=head;
+            while(temp!=null){
+                System.out.print(temp.data+"-->");
+                temp=temp.next;
+            }
+            System.out.println("NULL");
+        }
+        public void addAtSpecific(int x,int loc){
+        Node ptr=new Node(x);
+        Node temp=head;
+         for(int i=0;i<loc;i++) {
+             temp = temp.next;
+             if (temp == null) {
+                 System.out.println("cant insert");
+                 return;
+             }
+         }
+             ptr.next=temp.next;
+             temp.next=ptr;
+            System.out.println("inserted");
+        }
+        public void deleteFirst(){
+            if(head==null){
+                System.out.println("list is empty can't delete");
+                return;
+            }
+            head=head.next;
+        }
+        public void deleteLast(){
+        if(head==null){
+            System.out.println("empty list");
+            return;
+        }
+          if(head.next==null){
+              head=null;
+              return;
+          }
+          Node last=head;
+          Node secondlast =head.next;
+          while(secondlast.next !=null){
+              secondlast = secondlast.next;
+              last=last.next;
+          }
+          last.next=null;
+        }
+        public void deleteAtSpecific(int loc) {
+            Node ptr = head;
+            Node ptr1;
+            if (head == null) {
+                System.out.println("can't delete list is empty");
+            } else if (ptr.next == null) {
+                System.out.println("node is not available");
+            }
+                ptr=head;
+                for (int i = 0; i < loc; i++) {
+                    if (ptr == null) {
+                        System.out.println("can't delete");
+                    }
+                    ptr1=ptr;
+                    ptr=ptr.next;
+                    ptr1.next = ptr.next;
+                }
+
+
+
+        }
+
+
+
+    public static void main(String[] args) {
+        List l1 = new List();
+        l1.display();
+        l1.addFirst(1);
+        l1.addFirst(7);
+        l1.addFirst(2);
+        l1.addLast(9);
+        l1.addLast(12);
+        l1.display();
+        l1.deleteAtSpecific(2);
+        l1.display();
+        l1.addAtSpecific(5,5);
+        l1.display();
+        l1.deleteFirst();
+        l1.deleteLast();
+        l1.display();
+    }
+    }
