@@ -1,0 +1,34 @@
+public class Test {
+    public static void main(String[] args) {
+        Bedroom r1=new Bedroom(12,10,11);
+        Bedroom r2=new Bedroom(8,9,10);
+        Bedroom r3=new Bedroom(11,9,13);
+        r1.area();
+        r2.area();
+        r1.volume();
+        r2.volume();
+        r3.area();
+        r3.volume();
+    }
+}
+class Room3 {
+   final int length;
+    final int breadth;
+    Room3(int x,int y){
+        length=x;
+        breadth=y;
+    }
+    final void area(){
+        System.out.println("Area is: "+length*breadth);
+    }
+}
+class Bedroom extends Room3{
+    int height;
+    Bedroom(int x,int y,int z){
+        super(x,y);
+        height=z;
+    }
+   final void volume(){
+        System.out.println("volume is: "+length*breadth*height);
+    }
+}
