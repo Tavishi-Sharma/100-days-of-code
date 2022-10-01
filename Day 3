@@ -1,0 +1,37 @@
+import java.lang.StringBuilder;
+import java.util.Scanner;
+class Solution{
+
+  static String toCamelCase(String s){
+    System.out.println("input: "+s);
+        s=s.substring(0,1).toLowerCase()
+                +s.substring(1);
+
+        // Convert to StringBuilder
+        StringBuilder builder
+                = new StringBuilder(s);
+        for (int i = 0; i < builder.length(); i++) {
+
+            if (builder.charAt(i) == '_'|| builder.charAt(i) == '-' ) {
+
+                builder.deleteCharAt(i);
+                builder.replace(
+                        i, i + 1,
+                        String.valueOf(
+                                Character.toUpperCase(
+                                        builder.charAt(i))));
+            }
+        }
+
+        // Return in String type
+        return builder.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        String st=s.nextLine();
+        String st1=s.nextLine();
+        System.out.println(toCamelCase(st));
+        System.out.println(toCamelCase(st1));
+    }
+}
