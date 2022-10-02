@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class SparseMatrix {
+        static int max=20;
+        public static void main(String[] args) {
+            int row,columns;
+            Scanner s=new Scanner(System.in);
+            System.out.println("enter no. of row and columns:");
+            row=s.nextInt();
+            columns=s.nextInt();
+            int matrix1[][]= new int[row][columns];
+            int matrix2[][]=new int[SparseMatrix.max][3];
+            System.out.println("enter no. to first matrix");
+            read_Matrix(matrix1,row,columns);
+            create_sparseMatrix(matrix1,row,columns,matrix2);
+            print_sparseMatrix(matrix2);
+
+        }
+        public static void read_Matrix(int a[][], int row, int columns) {
+            Scanner sc = new Scanner(System.in);
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < columns; j++) {
+                    a[i][j] = sc.nextInt();
+                }
+            }
+        }
+        public static void create_sparseMatrix(int[][] a,int row,int columns, int b[][]){
+            int k=1;
+            b[0][0]=row;
+            b[0][1]=columns;
+            for(int i=0;i<row;i++){
+                for(int j=0;j<columns;j++){
+                    if(a[i][j]!=0){
+                        b[k][0]=i;
+                        b[k][1]=j;
+                        b[k][2]=a[i][j];
+                        k++;
+                    }
+                }
+                b[0][2]=k-1;
+            }
+        }
+        public static void print_sparseMatrix(int b[][]){
+            int columns;
+            columns=b[0][2];
+            System.out.println("sparse matrix");
+            for(int i=0;i<=columns;i++){
+                System.out.println("\t"+b[i][0]+"\t"+b[i][1]+"\t"+b[i][2]);
+            }
+        }
+}
+
+
+
