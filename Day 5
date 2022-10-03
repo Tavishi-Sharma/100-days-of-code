@@ -1,0 +1,58 @@
+public class Shape {
+    public static void main(String[] args) {
+        Area square=new Area(12);
+        System.out.println("Area of Square "+square.area(square.length));
+        Area circle=new Area(11.0);
+        System.out.println("Area of circle: "+circle.area(circle.radius));
+        Area rect1 =new Area(12,10);
+        System.out.println("Area of Rectangle:"+ rect1.area(rect1.length, rect1.breadth));
+        Area cube=new Area(13);
+        System.out.println("Area of cube:"+cube.area(cube.length));
+        Area cuboid=new Area(12,9,7);
+        System.out.println("Volume of cuboid :"+cuboid.volumeofCuboid(cuboid.length,cuboid.breadth,cuboid.height));
+
+
+    }
+}
+class Area{
+    float length;
+    float breadth;
+    float height;
+    double radius;
+
+    Area(float x, float y) {
+        length = x;
+        breadth = y;
+    }
+
+    Area(float x) {
+        length = breadth = x;
+    }
+
+    Area(float x, float y, float z) {
+        length = x;
+        breadth = y;
+        height = z;
+    }
+    Area(double r){
+        radius=r ;
+    }
+
+    int area(int x) {
+        return (int) (length * length);
+    }
+    float area(double x){
+        return (float) (3.14*radius*radius);
+    }
+    int area(float x, float y) {
+        return (int) (length * breadth);
+    }
+    float area(float x){
+        return 6*length*length;
+    }
+
+    float volumeofCuboid(float x,float y,float z) {
+        return length * breadth * height;
+    }
+
+}
