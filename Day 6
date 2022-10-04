@@ -1,0 +1,39 @@
+/*Reversing the words of the string
+   Example- " The sky is pink"
+   Expected output-"ehT yks si knip"
+   
+   Sample Test 1:"The quick brown fox jumps over the lazy dog."
+   output:ehT kciuq nworb xof spmuj revo eht yzal .god
+   
+   Sample Test 2:"apple"
+   output:elppa
+   
+   Sample Test 3:"a b c d"
+   output:a b c d
+   
+   Sample Test 4:"double  spaced  words"
+   output:elbuod  decaps  sdrow  */
+
+
+
+
+
+
+import java.util.*;
+public class Kata
+{
+  public static String reverseWords(final String original)
+  {
+    String words[] = original.split(" ", -1);
+    int i = 0; 
+    for (String w : words){
+      words[i++] = "" + new StringBuilder(w).reverse();
+      }
+    return String.join(" ", words);
+  }
+  public static void main(String args[]){
+    Scanner s=new Scanner(System.in);
+    String original=s.nextLine();
+    reverseWords(original);
+  }
+}
