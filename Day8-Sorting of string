@@ -1,0 +1,53 @@
+/* Sorting of String on the basis of number present in the substring
+  Example-"a3 Appl1e fruit4 is2"
+  Expected output:-Appl1e is2 a3 fruit4
+  
+  Sample test case :-
+    Input-"is2 Thi1s T4est 3a"
+    Output-"Thi1s is2 3a T4est"
+   //String cannot only have  numbers in it, otherwise it will throw error or exception. Like " 4 5 6 7" not allowed. 
+  
+  
+import java.util.*;
+public class Order {
+   private static int getNum(String s){        //created the function to get the number presentin the string
+
+     for(int i = 0; i < s.length(); i++){
+
+         if(Character.isDigit(s.charAt(i))){     //checking the character at i is digit or not
+
+             return Character.getNumericValue(s.charAt(i));  
+
+         }
+
+     }
+
+ return 0;
+
+ }
+
+
+  public static String order(String words) {   //created the function to sort out the string in ascending order of the number
+    if(words.equals("")){return "";}
+
+   String[] str = words.split(" ");      //converting the string into array of string
+
+   String[] temp = new String[str.length];    //creating new string object
+
+       for(int i = 0; i < str.length; i++){
+
+           temp[getNum(str[i])-1] = str[i];      //calling the getNum function to get the number
+
+       }
+
+ return String.join(" " , temp);        // return the soorted string
+
+
+} 
+
+public static void main(String args[]){
+    Scanner s=new Scanner(System.in);     
+    String st=s.nextLine();            //taking input from user
+    System.out.print(order(st));       //calling order function
+  }
+}
