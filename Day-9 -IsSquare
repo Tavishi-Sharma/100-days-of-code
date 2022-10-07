@@ -1,0 +1,42 @@
+/* checking whether the number is square or not
+   We will take a number input from user and will check whether it is perfect square or not.
+   I have created a function named isSquare to check this,if the number is perfect square then it will true, otherwise false.
+   
+   Example-17
+   Expected output:-false
+   
+   
+   Sample test case 1: -1
+   Output- false 
+   
+   Sample test case 2: 0
+   Output- true
+   
+   Sample test case 3:  26
+   Output- false
+   
+   Sample test case 4:  169
+   Output - true
+   */
+   
+import java.util.*;
+public class Square {    
+    public static boolean isSquare(int n) { 
+      if(n>=0){      //checking whether the number is less than 0 or greater than zero.
+        int s=(int)Math.sqrt(n);         //using in-built function sqrt() to find the square root of the function
+        if(s*s==n){                     // checking whether the square of a number we get from above step is equal to number inputed 
+          return true;
+        }
+         
+    }
+      else{
+        return false;
+      }
+      return false;
+}
+  public static void main(String[] args){
+   Scanner s=new Scanner(System.in);
+    int num=s.nextInt();       //taking input from user
+    isSquare(num);             //calling isSquare function
+  }
+}
