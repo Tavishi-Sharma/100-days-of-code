@@ -1,0 +1,25 @@
+/* Create phone number as per the format:-
+   "(starting three elemnets of array) next three elements of array-remaining elements of array"
+   Example- {5,9,0,3,9,0,1,5,7,2}
+   Expected output-(590) 390-1572
+   
+   Sample test case:{1,2,3,4,5,6,7,8,9,0}
+   Output:-(123) 456-7890
+   
+   import java.util.Scanner;
+public class Kata {
+  public static String createPhoneNumber(int[] numbers) {
+    String str="("+Integer.toString(numbers[0])+Integer.toString(numbers[1])+Integer.toString(numbers[2])+") "+Integer.toString(numbers[3])+Integer.toString(numbers[4])+Integer.toString(numbers[5])+"-"+Integer.toString(numbers[6])+Integer.toString(numbers[7])+Integer.toString(numbers[8])+Integer.toString(numbers[9]);
+    return str;
+  }
+  
+  public static void main(String args[])
+    {
+      int a[]=new int[10];
+      Scanner s=new Scanner(System.in);
+      for(int i=0;i<a.length;i++){
+        a[i]=s.nextInt();
+      }
+      System.out.println(createPhoneNumber(a));
+  }
+}
