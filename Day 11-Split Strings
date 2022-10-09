@@ -1,0 +1,34 @@
+/*  Complete the solution so that it splits the string into pairs of two characters. 
+If the string contains an odd number of characters then it should replace the missing second character of the final pair with an underscore ('_').
+
+Examples:
+* 'abc' =>  ['ab', 'c_']
+* 'abcdef' => ['ab', 'cd', 'ef']
+
+
+Sample test case 1: "abcdef"
+            Output:[ab, cd, ef]
+
+Sample test case 2:"HelloWorld"
+            Output:[He, ll, oW, or, ld]
+
+Sample test case 3:"abcde"
+            Output:[ab, cd, e_]
+     
+Sample test case 4:"LovePizza"
+            Output:[Lo, ve, Pi, zz, a_]
+*/
+
+
+import java.util.Scanner;
+public class StringSplit {
+    public static String[] solution(String s) {
+    s = (s.length() % 2 == 0)?s:s+"_";  //using the conditional operator if the length is even s will be the string,otherwise (_) is added to the end
+        return s.split("(?<=\\G.{2})"); //spliting the string into the format 
+    }
+  public static void main(String[] args){
+    Scanner s=new Scanner(System.in);
+    String st=s.nextLine();
+    System.out.println(solution(st));
+  }
+}
