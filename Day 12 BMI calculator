@@ -1,0 +1,41 @@
+/* BODY MASS CALCULATOR
+   We have to calculate BMI,so we will take height and weight input from user,and will calculate the BMI using the formula:-
+   BMI=weight/(height)^2
+   
+   Sample test case: height=167cm ,weight=57kg
+             Output:20.43
+   
+   Sample test case: height=-150cm , weight=45kg
+             Output: Enter correct input
+  */
+
+
+import java.util.Scanner;
+
+public class Exercise {
+     float height, weight;
+
+    public static float calculate_BMI(float height, float weight) {
+        float bmi = weight/(height * height);
+        return bmi;
+    }
+
+    public static void main(String[] args) {
+        Exercise person1 = new Exercise();
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter your weight in Kg");
+        float w= s.nextInt();
+        System.out.println("Enter your height in cm");
+        float h = s.nextInt();
+        if (w< 0 && h < 0) {
+            System.out.println("Enter correct input");
+        }
+        else{
+            h=h/100;
+        }
+        person1.height=h;
+        person1.weight=w;
+        float Bmi=calculate_BMI(person1.height, person1.weight);
+        System.out.println("Body mass index:"+Bmi);
+    }
+}
