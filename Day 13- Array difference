@@ -1,0 +1,48 @@
+/* We have give two arrays of some size we have to remove the elements present in the second array from first array
+
+Example :A1={1,2,3} A2={1,4,5}
+expected output:-{2,3}
+
+Sample test case:- A1={2} and A2={1,2}
+ Output:-{2}
+
+Sample test case:- A1={} and A2={1}
+ Output:-{}
+ 
+ 
+ */
+ import java.util.Scanner;
+public class Kata {
+
+  public static int[] arrayDiff(int[] a, int[] b) {
+    for(int i = 0; i < b.length; i++){
+      for(int j = 0; j < a.length; j++){
+        if(b[i] == a[j]){
+          int[] anotherArray = new int[a.length - 1];
+
+          for (int g = 0, k = 0; g < a.length; g++) {
+              if (g == j) {
+                  continue;
+              }
+              anotherArray[k++] = a[g];
+          }
+          a = arrayDiff(anotherArray,b);
+        }
+      }
+      
+    }
+    
+    return a;
+  }
+  public static void main(String[] args){
+    Scanner sc=new Scanner(System.in);
+    int [] a=new int[10];
+    int [] b=new int[10];
+    for(int i=0;i<10;i++){
+      a[i]=sc.nextInt();
+      b[i]=sc.nextInt();
+    }
+    arrayDiff(a,b);
+  }
+
+}
