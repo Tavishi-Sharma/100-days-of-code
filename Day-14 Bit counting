@@ -1,0 +1,27 @@
+/* Problem statement- We have to convert the given number into binary representaion then have to count the number of bit equal to 1
+
+Example- 5
+Binary represtation- 0101
+Expected output- 2
+
+Sample test case 1: 1234
+Output: 5
+
+Sample test case 2: 7
+Output: 3
+*/
+
+import java.io.*;
+public class BitCounting {
+
+	public static int countBits(int n){
+	 String b=Integer.toBinaryString(n);
+    int count=0;
+    for(int i=0;i<b.length();i++){
+      if(b.charAt(i)=='1'){
+        count++;
+      }
+    }
+    return count;
+	}
+}
