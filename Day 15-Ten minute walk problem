@@ -1,0 +1,44 @@
+/* We take a single letter array from user or generating using random class in java.
+The array contains only 'n','s','e' and 'w'.
+At a time we can walk in one direction and it takes one minute to walk around in one direction.
+We have to make a path for walk that exactly takes 10 mintues.
+if the path defined through array takes 10 mintues it will return ture otherwise false.
+
+
+Sample test case:-['n','s','n','s','n','s','n','s','n','s']
+Output-true
+
+Sample test case:-['n','n','n','s','n','s','n','s','n','s']
+Output-false
+
+Sample test case:-['w']
+Output-false
+
+Sample test case:-['s']
+Output-false
+*/
+public class TenMinWalk {
+  public static boolean isValid(char[] walk) {
+    if (walk.length != 10) {
+      return false;
+    }
+    int x = 0, y = 0;              //counter for checking whether reached at starting point or not
+    for (int i = 0; i < 10; i++) {
+      switch (walk[i]) {
+        case 'n':
+          y++;
+          break;
+        case 'e':
+          x++;
+          break;
+        case 's':
+          y--;
+          break;
+        case 'w':
+          x--;
+          break;
+      }
+    }
+    return x == 0 && y == 0;
+  }
+}
