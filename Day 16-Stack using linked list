@@ -1,0 +1,96 @@
+/* Stack is a data structure that is used to organize and store the data in a better manner.
+In the below code ,We have implemented the stack using linked list. Linked list is a data structure used to store data and link to the next instruction or next node.
+In stack, there is only one end open from where we can insert or delete the elements in stack and that is called TOP.
+*/
+
+import java.util.Scanner;
+
+public class Stacklink {
+    Node top;                    //create anode called top
+
+    class Node {                //For creating node created Node class having properties value and next
+        int val;
+        Node next;
+        Node(){
+
+        }
+        Node(int x) {
+            val = x;
+            next = null;
+        }
+    }
+
+    public void pushStack(int x)         //For inserting a element into Stack
+    { 
+        Node ptr = new Node(x);
+        if (top == null) {
+                top=ptr;
+                return;
+            }
+            else{
+                ptr.next=top;
+                top=ptr;
+            }
+        System.out.println("Item pushed");
+        }
+
+
+
+    public void popStack()              //For deleting a element from Stack
+    {
+        Node ptr=new Node();
+        if(top==null){
+            System.out.println("UNDERFLOW");
+        }
+        else{
+            top=top.next;
+        }
+        System.out.println("Item popped");
+    }
+    public void display()               //For displaying the elements in Stack
+    {
+        Node ptr=top;
+        if (ptr==null){
+            System.out.println("Stack is empty");
+        }
+        else{
+            System.out.println("Printing Stack elements");
+            while(ptr!=null){
+                System.out.print(" | "+ptr.val);
+                ptr=ptr.next;
+            }
+        }
+    }
+
+    public static void main(String[] args)   //main function
+    {
+        int choice=0;
+        Stacklink st=new Stacklink();
+        System.out.println("Stack operations");
+        while(choice!=4){
+            System.out.println("\nEnter your choice:\n 1.Push\n 2.Pop\n 3.Display\n 4.Exit");    //choice asked from user
+            Scanner s=new Scanner(System.in);
+            choice=s.nextInt();
+            switch (choice){
+                case 1:
+                    System.out.println("enter element to push");
+                    int push=s.nextInt();
+                    st.pushStack(push);
+                    break;
+                case 2:
+                    st.popStack();
+                    break;
+                case 3:
+                    st.display();
+                    break;
+                case 4:
+                    System.out.println("existing..");
+                    break;
+                default:
+                    System.out.println("enter valid choice");
+
+        }
+    }
+}
+}
+
