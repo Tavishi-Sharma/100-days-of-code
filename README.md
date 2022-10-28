@@ -1,2 +1,1 @@
-# Data-Structure-and-Algorithms
-Includes all data structure code in java.
+Solving the various problems in Java.
