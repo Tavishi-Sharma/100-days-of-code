@@ -17,7 +17,7 @@ If it is the case we will return k, if not return -1.
 Constraint: n and p will always be given as strictly positive integers.
 
 Example: 27,1
-Explaination-2^1+7^2=51. Now, 51%27 !=0 so the it will return -1.
+Explanation-2^1+7^2=51. Now, 51%27 !=0 so it will return -1.
 Output:-1
 
 Sample test case `1:(89,1)
