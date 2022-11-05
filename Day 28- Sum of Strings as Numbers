@@ -1,0 +1,42 @@
+/* Given the string representations of two integers, return the string representation of the sum of those integers.
+
+For example:
+sumStrings('1','2') => '3'
+A string representation of an integer will contain no characters besides the ten numerals "0" to "9".
+
+Constraint:- Write a suitable code without using BigInteger and BigDecimal.
+
+Sample Test case 1:-sumString('123','456')
+Output:-'579'
+
+Sample Test case 2:-sumString('','5')
+Output:-'5'
+
+Sample Test case 3:-sumString("00103", "08567")
+Output:-"8670"
+
+Sample Test case 4:-sumString("50095301248058391139327916261", "81055900096023504197206408605")
+Output:-"131151201344081895336534324866"
+
+*/
+public class Kata {
+  public static String sumStrings(String s, String s2) {
+  String result = "";
+    s2 = "0".repeat(s.length() < s2.length() ? 0: s.length() - s2.length())+s2;
+    s = "0".repeat(s2.length() < s.length() ? 0: s2.length() - s.length())+s;
+    int remainder = 0;
+    for (long i = s.length()-1; i >= 0; i--) {
+      int n = Integer.parseInt(s.charAt((int) i) + "");
+      n += Integer.parseInt(s2.charAt((int) i) + "");
+      n += remainder;
+      remainder = n/10;
+      result = n%10 + result;
+    }
+    result = remainder == 0 ? result: remainder + result;
+    while (result.startsWith("0")) {
+      result = result.substring(1, result.length());
+    }
+    return result;
+  }  
+  }
+
