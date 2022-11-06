@@ -1,0 +1,45 @@
+/*
+Create a function that takes a positive integer and returns the next bigger number that can be formed by rearranging its digits. For example:
+
+12 ==> 21
+513 ==> 531
+2017 ==> 2071
+
+If the digits can't be rearranged to form a bigger number, return -1:
+
+9 ==> -1
+111 ==> -1
+531 ==> -1
+
+Sample test 1:- 414
+Output:-441
+
+Sample test 2:-10990
+Output:-19009
+*/
+public class Kata
+{
+    public static long nextBiggerNumber(long n)
+    {
+     byte[] ds = Long.toString(n).getBytes();  //converting to byte
+      int nd = ds.length;
+      int i = nd - 2;
+      while (i >= 0 && ds[i] >= ds[i + 1])
+        i--;
+      if (i < 0)
+        return -1;
+      int j = nd - 1;
+      while (ds[j] <= ds[i])   //comparing the two digits
+        j--; 
+      swap(ds, i, j);                   //swap function is called
+      for (int k = 1; i + k < nd - k; k++)
+        swap(ds, i + k, nd - k);           
+      return Long.parseLong(new String(ds));      //returning the final result converting to long
+    }
+    
+    private static void swap(byte[] xs, int i, int j) {
+      byte x = xs[i];
+      xs[i] = xs[j];
+      xs[j] = x;
+    }
+}
