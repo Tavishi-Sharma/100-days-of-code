@@ -1,0 +1,66 @@
+/*
+Create a function that takes a number as parameter finds it's factorial and decompose it's factorial into prime factors.
+Prime numbers should be in increasing order. When the exponent of a prime is 1 don't put the exponent.
+The function should return the prime factors of n! in string form.
+
+Example:-n = 22
+         decomp(22) -> "2^19 * 3^9 * 5^4 * 7^3 * 11^2 * 13 * 17 * 19"
+
+Sample test case 1:-decomp(5)
+Output:-"2^3 * 3 * 5"
+
+Sample test case 2:-decomp(25)
+Output:-"2^22 * 3^10 * 5^6 * 7^3 * 11^2 * 13 * 17 * 19 * 23"
+*/
+import java.util.*;
+class FactDecomp {
+    
+    public static String decomp(int n) {
+    if (n == 1) {
+            return "1";
+        }
+
+        LinkedHashMap<Integer,Integer> decomp = new LinkedHashMap();  //creating key pair
+
+        for (int i = 2; i <= n; i++) {
+            int currentNum = i;
+            int counter = 0;
+
+            for (int k = 2; k <= i; ) {
+                final int remainder = currentNum % k;
+
+                if (remainder != 0 || currentNum <= 1) {
+                    if (counter !=0) {
+                        if (decomp.containsKey(k)) {
+                            decomp.put(k,decomp.get(k) + counter);
+                        } else {
+                            decomp.put(k, counter);
+                        }
+                    }
+
+                    k++;
+                    counter = 0;
+                } else {
+                    counter++;
+                    currentNum /= k;
+                }
+            }
+        }
+
+        final StringBuilder sb = new StringBuilder();
+
+        for (final Map.Entry<Integer,Integer> entry : decomp.entrySet()) {
+            if (sb.length() != 0)  {
+                sb.append(" * ");
+            }
+
+            sb.append(entry.getKey());
+
+            if (entry.getValue() != 1) {
+                sb.append("^").append(entry.getValue());
+            }
+        }
+
+        return new String(sb); 
+    }
+}
