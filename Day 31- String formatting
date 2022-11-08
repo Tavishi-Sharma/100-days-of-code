@@ -1,0 +1,30 @@
+/*
+Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+
+Example:
+Input:-pigIt('Pig latin is cool'); 
+Output:-"igPay atinlay siay oolcay"
+
+Sample test case 1:pigIt('This is beautiful');
+Output:-"hisTay siay eautifulbay"
+
+Sample test case 2:-pigIt('Hello world !');     
+Output:-"elloHay orldway !"
+*/
+import java.util.*;
+public class PigLatin {
+static String func(String s){
+        return s.substring(1,s.length()) + s.charAt(0) + "ay";  //formatting of the string is done
+    }
+    static boolean isp(String s){
+        return s.equals("!") || s.equals(",") || s.equals(";") || s.equals(".") || s.equals("?") || s.equals(":") || s.equals('\'') || s.equals('\"'); //checking whether the character is special character or not
+    }
+    public static String pigIt(String str) {
+        String[] arr = str.split(" ");     //splitting the string in array
+            for(int i = 0; i < arr.length; i++){
+                if(!isp(arr[i])){arr[i] = func(arr[i]);}  // storing the formatted string array into new string array
+            }
+        return String.join(" " , arr);  //joining the string again
+   
+}
+}
