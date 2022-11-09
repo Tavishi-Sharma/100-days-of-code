@@ -1,0 +1,45 @@
+/*
+Write a function that returns the positions and the values of the "peaks" (or local maxima) of a numeric array.
+Example:- the array arr = [0, 1, 2, 5, 1, 0] has a peak at position 3 with a value of 5 (since arr[3] equals 5).
+The output will be returned as a ``Map<String,List>with two key-value pairs:"pos"and"peaks". If there is no peak in the given array, simply return {"pos" => [], "peaks" => []}.
+
+Example:-
+pickPeaks([3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 3]) should return {pos: [3, 7], peaks: [6, 3]}
+The first and last elements of the array will not be considered as peaks.
+[1, 2, 2, 2, 1] has a peak while [1, 2, 2, 2, 3] and [1, 2, 2, 2, 2] do not. In case of a plateau-peak, please only return the position and value of the beginning of the plateau.
+
+
+Sample Test case 1:-{2,1,3,1,2,2,2,2,1}
+Output:- posS-->{2,4}
+         peaksS-->{3,2}
+        
+Sample Test case 2:-{1,2,3,6,4,1,2,3,2,1}
+Output:- posS-->{3,7}
+         peaksS-->{6,3}
+*/
+import java.util.*;
+
+public class PickPeaks {
+    
+    public static Map<String,List<Integer>> getPeaks(int[] arr) {
+    Map<String,List<Integer>> ans = new HashMap<String,List<Integer>>() {{
+            put("pos",   new ArrayList<Integer>() );
+            put("peaks", new ArrayList<Integer>() );
+        }};
+        int posMax = 0;
+        boolean matchAsc = false;
+        
+        for (int i = 1 ; i < arr.length ; i++) {
+            if (arr[i-1] < arr[i]) {
+                matchAsc = true;
+                posMax = i;
+            }
+            if (matchAsc && arr[i-1] > arr[i]) {
+                matchAsc = false;
+                ans.get("pos").add(posMax);
+                ans.get("peaks").add(arr[posMax]);
+            }
+        }
+        return ans;    
+    }
+}
