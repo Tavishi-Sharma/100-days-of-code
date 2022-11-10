@@ -1,0 +1,29 @@
+/*
+Create a function to validate if the string is alphanumeric or not. The function will return true if the input string is alphanumeric, otherwise it will return false.
+Check the following conditions to validate the string to be alphanumeric:-
+a) The string must have at least one character (" " is not valid)
+b) Allowed characters are uppercase / lowercase latin letters and digits from 0 to 9
+c) No whitespaces / underscore / punctuations
+
+Example:-"abcde" -->it should return true.
+
+Sample Test case 1:-".m6djxwŚdtDm6pAvIc"
+Output:-false
+
+Sample Test case 2:-"uXmg"
+Output:-true
+
+Sample Test case 3:-"punctuations."
+Output:-false
+
+Sample Test case 4:-"with_underscore"
+Output:-false
+
+Sample Test case 5:-" "
+Output:-false
+*/
+public class SecureTester{ 
+  public static boolean alphanumeric(String s){
+    return s.matches("[A-Za-z0-9]+");   //checking whether the input string matches the regular expression or not
+  }
+}
