@@ -1,0 +1,57 @@
+/*
+Write a function that accepts a square matrix (N x N 2D array) and returns the determinant of the matrix.
+
+How to take the determinant of a matrix -- it is simplest to start with the smallest cases:
+
+A 1x1 matrix |a| has determinant a.
+
+A 2x2 matrix [ [a, b], [c, d] ] or
+
+|a  b|
+|c  d|
+has determinant: a*d - b*c.
+
+The determinant of an n x n sized matrix is calculated by reducing the problem to the calculation of the determinants of n matrices ofn-1 x n-1 size.
+
+For the 3x3 case, [ [a, b, c], [d, e, f], [g, h, i] ] or
+
+|a b c|  
+|d e f|  
+|g h i|  
+the determinant is: a * det(a_minor) - b * det(b_minor) + c * det(c_minor) where det(a_minor) refers to taking the determinant of the 2x2 matrix created by crossing out the row and column in which the element a occurs:
+
+|- - -|
+|- e f|
+|- h i|  
+
+Sample Test case 1:-{5}
+Output:- 5
+
+Sample Test case 2:-{{6,1,1}, {4,-2,5}, {2, 8, 7}}
+Output:-10
+
+Sample Test case 3:-{{2,5,3,6,3}, {17,5,7,4,2}, {7,8,5,3,2}, {9,4,-6,8,3}, {2,-5,7,4,2}}
+Output:-2060
+
+Sample Test case 4:-{{2,4,-3}, {1,8,7}, {2, 3, 5}}
+Output:-113
+
+*/
+public class Matrix {
+    
+    public static int determinant(int[][] matrix) {
+        int d = 0, size = matrix.length;
+            if (size == 1) return matrix[0][0];      //if matrix is 1X1.
+            
+            for (int n = 0 ; n < size ; n++) {
+                int[][] newM = new int[size-1][size-1];         //creating a new array 
+                for (int x = 1 ; x < size ; x++) {
+                    for (int y = 0 ; y < size ; y++) {
+                      if (y == n) continue;
+                      newM[x-1][y + (y>n ? -1 : 0)] = matrix[x][y];  //getting the minor matrix
+                }
+                d += (n%2!=0 ? -1 : 1) * matrix[0][n] * determinant(newM);   //finding determinant and calling the function recursively
+            }
+            return d;
+      }
+    }
