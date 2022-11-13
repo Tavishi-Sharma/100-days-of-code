@@ -1,0 +1,129 @@
+/* Converting the Infix expression to prefix expression using Stack.
+Example:-
+Infix expression:- A+B/C
+Prefix expression:-/+ABC
+Approach:-
+1.Take the input expression as string.
+2.Reverse the string.
+3.check if the character is operand, if yes simply add it into prefix string.
+4.if no, then check if the character is '(' ,if yes simply push it into the stack.
+5.if no, then check if the character is ')',if yes pop till next'(' is found.
+6.if no, then check if the character is operator,if yes then check for its precedence:-
+    if the stack is empty, simply push it in the stack
+    if no, check whether precedence of the character is greater or equal to the element at the top index of stack,if yes push character in stack
+           if no, check whether precedence of the character is less than to the element at the top index of stack,if yes then pop elemenys from stack tillthe condition is true.
+ 7.reverse the string again.
+*/
+import java.util.Scanner;
+
+class Stack {
+    char arr[];
+    int index = -1;
+    int value;
+    char ops;
+    Stack(){
+
+    }
+    Stack(int n) {
+        arr = new char[n];
+    }
+
+    void push(char c) {     //to insert in stack
+        if (index < arr.length) {
+            index++;
+            arr[index] = c;
+        } else {
+            System.out.println("Index out of range");
+        }
+    }
+
+    char top() {     //to get the top element
+        return arr[index];
+    }
+
+    void pop() {     //to pop out the element
+        if (index >= 0) {
+            index--;
+        } else {
+            System.out.println("stack is empty ");
+        }
+    }
+
+    boolean empty() {     //to check if the stack is empty
+        if (index == -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+    public class InfixtoPrefix {
+        int prec(char c) {   //setting the precedence of the operators
+            if (c == '^') {
+                return 3;
+            } else if (c == '/' || c == '*') {
+                return 2;
+            } else if (c == '-' || c == '+') {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+
+        public static String revercString(String s) {
+            String rString = "";            //to reverse the string
+            for (int i = s.length() - 1; i >= 0; i--) {
+                rString = rString + s.charAt(i);
+            }
+            return rString;
+        }
+
+        public String infixtoprefix(String s) {  //function to convert infix to prefix
+            String r = revercString(s);
+            System.out.println(r);
+            Stack stack_obj = new Stack(s.length());
+            String ans = "";
+            for (int i = 0; i < r.length(); i++) {   //checking if the character is operand
+                if (r.charAt(i) >= 'a' && r.charAt(i) <= 'z' || r.charAt(i) >= 'A' &&
+                        r.charAt(i) <= 'Z') {
+                    ans = ans + r.charAt(i);
+                } else if (r.charAt(i) == ')') {    //checking if the character is')'
+                    stack_obj.push(r.charAt(i));
+                } else if (r.charAt(i) == '(') {    //checking if the character is '('
+                    while (stack_obj.top() != ')') {
+                        ans += stack_obj.top();
+                        stack_obj.pop();
+                    }
+                    if (!stack_obj.empty()) {       //checking if the stack is empty or not
+                        stack_obj.pop();
+                    }
+                } else {
+                    while (!stack_obj.empty() && prec(stack_obj.top()) >= prec(r.charAt(i))) {
+                        ans += stack_obj.top();
+                        stack_obj.pop();
+                    }
+                    stack_obj.push(r.charAt(i));
+                }
+
+            }
+            while (!stack_obj.empty()) {
+                ans += stack_obj.top();
+                stack_obj.pop();
+            }
+            return revercString(ans);  
+
+        }
+        
+
+        public static void main(String[] args) {     //main function
+            Scanner s=new Scanner(System.in);
+            String str=s.nextLine();
+            InfixtoPrefix obj = new InfixtoPrefix();
+            System.out.println(obj.infixtoprefix(str));
+
+        }
+
+    }
+
+
