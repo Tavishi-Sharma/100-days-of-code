@@ -1,0 +1,87 @@
+/* Implementation of queue usig circular linked list.
+Queue is a data structure which has two ends- front and rear.
+Gerenally, we insert the element in the queue at the rear end and delete the element from the front end.
+example :-insert(2)
+            output:- 2
+          insert(3)
+            output:-2 3
+          insert(6)
+            output:-2 3 6
+          insert(5)
+            output:-2 3 6 5
+          delete()
+            output:-3 6 5
+          delete()
+            output:-6 5
+This scenario can be implemented using circular single linked list where for inserting the element at the end of the linked list and deletion is done at the beginning of the linked list
+*/
+public class QueueCircular {    //creating the Queue structure
+    Node front;
+    Node rear;
+    class Node{
+        int data;
+        Node next;
+        Node prev;
+        Node(int x){
+            data=x;
+            next=null;
+            prev=null;
+        }
+    }
+    public void enqueue(int x){   //function to insert the elements
+        Node ptr=new Node(x);
+        if(front==null){         //checking if the queue is empty
+            ptr.next=ptr;
+            ptr.prev=ptr;
+            front=rear=ptr;
+        }
+        else {
+            ptr.next=front;
+            rear.next=ptr;
+            ptr.prev=rear;
+            rear=ptr;
+            front.prev=ptr;
+        }
+        System.out.println("Enqueued");
+    }
+    public void deque(){        //function to delete the elements
+        if(front==null){
+            System.out.println("UNDERFLOW");   //checking if the queue is empty
+        }
+        else if(front==rear){
+            front=rear=null;
+        }
+        else{
+            Node temp=front;
+            rear.next=front.next;
+            front=front.next;
+            front.prev=rear;
+        }
+        System.out.println("Dequeued");
+    } 
+    public void show(){       //function to dipaly elements in queue
+        if(front==null){
+            System.out.println("Queue is empty");
+        }
+        Node temp=front;
+        while(temp.next!=front){
+            System.out.print(temp.data+"  ");
+            temp=temp.next;
+        }
+        System.out.print(temp.data+"\n");
+    }
+
+    public static void main(String[] args) {
+        QueueCircular Qc=new QueueCircular();
+        Qc.enqueue(10);
+        Qc.enqueue(12);
+        Qc.enqueue(14);
+        Qc.enqueue(16);
+        Qc.enqueue(18);
+        Qc.show();
+        Qc.deque();
+        Qc.deque();
+        Qc.show();
+
+    }
+}
