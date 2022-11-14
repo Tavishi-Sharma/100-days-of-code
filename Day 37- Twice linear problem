@@ -1,0 +1,42 @@
+/*
+Consider a sequence u where u is defined as follows:
+
+The number u(0) = 1 is the first one in u.
+For each x in u, then y = 2 * x + 1 and z = 3 * x + 1 must be in u too.
+There are no other numbers in u.
+Ex: u = [1, 3, 4, 7, 9, 10, 13, 15, 19, 21, 22, 27, ...]
+
+1 gives 3 and 4, then 3 gives 7 and 10, 4 gives 9 and 13, then 7 gives 15 and 22 and so on...
+
+Task:
+Given parameter n the function dbl_linear (or dblLinear...) returns the element u(n) of the ordered (with <) sequence u (so, there are no duplicates).
+
+Example:
+dblLinear(10) should return 22
+
+Sample test case 1:-dblLinear(30)
+Output:-91
+
+Sample test case 2:-dblLinear(50)
+Output:-175
+*/
+import java.util.*;
+class DoubleLinear {
+    
+    public static int dblLinear (int n) {
+        Deque<Integer>  deque2 = new ArrayDeque<Integer> ((int)n /2);      //creating a deque of length n/2
+        Deque<Integer>  deque3 = new ArrayDeque<Integer> ((int)n /2);      //creating a deque of length n/2
+        int cnt = 0, h = 1;         //intial values
+        while (true) {
+            if (cnt >= n) return h;
+            deque2.addLast(2 * h + 1);    //adding the result to the deque
+            deque3.addLast(3 * h + 1);
+            h = Math.min(deque2.peekFirst(), deque3.peekFirst());   //calculating the minimum value and storing it in h
+            if (h == deque2.peekFirst())    //if h is equal to the fist element of deque 2 then remove the first element
+                deque2.removeFirst();
+            if (h == deque3.peekFirst())
+                deque3.removeFirst();
+            cnt++;
+    }
+}
+  }
