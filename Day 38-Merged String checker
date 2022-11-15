@@ -1,7 +1,7 @@
 /*
-Create a function which take three strings as arguement-one is original and other two are substring which when merged may or may not gives the original string.
+Create a function which take three strings as arguements-one is original and the other two are substring which when merged may or may not gives the original string.
 Using the function we have to check whether the 2 parts of the string will give the same original string after merging or not.
-If after mergig the strings we get the original string then the function will return true, otherwise will return false.
+If after merging the strings we get the original string then the function will return true, otherwise will return false.
 
 Example:-
 'codewars' is a merge from 'cdw' and 'oears':
@@ -32,14 +32,14 @@ Output:-true
 public class StringMerger {
 
     public static boolean isMerge(String s, String part1, String part2) {
-       if (s.equals("")) {
-			return part1.equals("") && part2.equals("");
+       if (s.equals("")) {        //checking for empty string
+			return part1.equals("") && part2.equals("");   
 		} else {
 			boolean isMerge1 = false, isMerge2 = false;
-			if (part1.length() > 0 && s.charAt(0) == part1.charAt(0))
-				isMerge1 = isMerge(s.substring(1), part1.substring(1), part2);
-			if (part2.length() > 0 && s.charAt(0) == part2.charAt(0))
-				isMerge2 = isMerge(s.substring(1), part1, part2.substring(1));
+			if (part1.length() > 0 && s.charAt(0) == part1.charAt(0))    //checking if the character at given index of s is equal to the character at given index of part1.
+				isMerge1 = isMerge(s.substring(1), part1.substring(1), part2);      //recursive call 
+			if (part2.length() > 0 && s.charAt(0) == part2.charAt(0))    //checking if the character at given index of s is equal to the character at given index of part2.
+				isMerge2 = isMerge(s.substring(1), part1, part2.substring(1));      //recursive call
 			return isMerge1 || isMerge2;
 		}
     }
