@@ -1,0 +1,36 @@
+/*
+Your task is to check wheter a given integer is a perfect power. If it is a perfect power, return a pair m and k with mk = n as a proof. Otherwise return Nothing, Nil, null, NULL, None or your language's equivalent.
+
+Note: For a perfect power, there might be several pairs. For example 81 = 3^4 = 9^2, so (3,4) and (9,2) are valid solutions. However, the tests take care of this, so if a number is a perfect power, return any pair that proves it.
+
+Sample test case 1:  isPerfectPower(4) 
+Output:-new int[]{2,2}
+
+Sample test case 2:  isPerfectPower(5)
+Output:-null
+
+Sample test case 3:  isPerfectPower(8)
+Output:- new int[]{2,3}
+
+Sample test case 4:  isPerfectPower(9)
+Output:-new int[]{3,2}
+*/
+import java.util.*;
+public class PerfectPower {
+        public static int[] isPerfectPower(int n) {
+            final double sqrt = Math.sqrt(n);  //finding the square root of n
+            for (int i = 2, j = 2; i <= sqrt; ) {
+                final int curPow = (int) Math.pow(i, j);    //finding the value of i^j
+
+                if (curPow == n) {
+                    return new int[]{i, j};          //return the key value pair
+                } else if (curPow > n) {
+                    i++;
+                    j = 2;
+                } else {
+                    j++;
+                }
+            }
+            return null;          //returning null if the pair is not found
+        }
+  }
