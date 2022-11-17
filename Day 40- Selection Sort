@@ -1,0 +1,71 @@
+/*
+Selection sort isa sorting algorithmthat selects the smallest element from an unsorted list in each iteration and places that element at the beginning of the unsorted list.
+
+Working of selection sort:-
+Let A is an array with elements:- {9,3,7,0,2}
+i)Set first element as minimum, here it is 9.
+ii)Compare the nminimum with second element.
+   If second element is smaller then minimum, then set second element as minimum
+   In this case, 3<9 .So, new minimum is 3.
+   Again comparing it with next element which is 7, 3 is smaller than 7. So, minimum would remain same.
+   Compare with next 0<3. So new minimum is 0.
+   Compare witn next 0<2. Minimum is 0.
+iii)swap(9,0)
+Now the array is like:- 0,3,7,9,2
+Now take second element as minimum i.e. 3 compare it with the next element which is 7.3<7 so minimum will not change.
+Compare 3 with next element which is 9, but 3<9 so minimum will not change.
+Comapre 3 with next which is 2, 2<3 so new minimum will be 2.We have come to the end of the array
+swap minimum and second element i.e. swap(3,2)
+Array:- 0,2,7,9,3
+Take 3rd element as minimum i.e. 7 compare with next which is 9. Since 7<9, minimum will not change.
+Compare with next which is 3. 3<7 so, minimum will be 3.
+swap(7,3)
+Array:-0,2,3,9,7
+Take 4th element as minimum i.e. 9 compare with next which is 7.Since 7<9, minimum will be 7.Nothing to compare next. 
+So, swap(9,7)
+Sorted Array:- 0,2,3,7,9.
+
+Sample test case 1:-{0,0,0}
+Output:-0,0,0
+
+Sample test case 2:-{-1,-2,-3,-4}
+Output:-{-4,-3,-2,-1}
+*/
+import java.util.Scanner;
+ 
+public class SelectionSort {                 //Main class
+    public static void main(String[] args) {
+        System.out.println("Enter the size of array");
+        Scanner s=new Scanner(System.in);
+        int size=s.nextInt();
+        int [] array=new int[10];
+        for(int i=0;i<size;i++){
+            System.out.println("enter "+i+"th element");
+            array[i]=s.nextInt();
+        }
+        System.out.println("Entered array:-");
+        printArray(array,size);
+        selectionSort(array,size);
+        System.out.println("Sorted Array:-");
+        printArray(array,size);
+    }
+    static void selectionSort(int[] A,int length){   //selection sort function for sorting the array
+        for(int step=0;step<length-1;step++){
+            int minimum=step;
+            for(int k=step+1;k<length;k++){
+                if(A[k]<A[minimum]){     //comparing if the step is less then minimum or not
+                    minimum=k;
+                }
+            }
+            int temp=A[minimum];  //swapping
+            A[minimum]=A[step];
+            A[step]=temp;
+        }
+    }
+    static void printArray(int [] A,int length){     //printing the elements in array.
+        for(int i=0;i<length;i++){
+            System.out.print(A[i]+" ");
+        }
+        System.out.println();
+    }
+}
