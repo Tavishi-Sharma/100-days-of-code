@@ -1,0 +1,108 @@
+/*
+Merge Sort is one of the most popularsorting algorithmsthat is based on the principle ofDivide and Conquer Algorithm.
+
+Suppose we had to sort an array A.
+■A subproblem would be to sort a sub-section of this array starting at index p and ending at index r, denoted as A[p..r].
+■Divide:- If q is the half-way point between p and r, then we can split the subarray A[p..r] into two arrays A[p..q] and A[q+1, r].
+■Conquer:- In the conquer step, we try to sort both the subarrays A[p..q] and A[q+1, r]. If we haven't yet reached the base case, we again divide both these subarrays and try to sort them.
+■Combine:-When the conquer step reaches the base step and we get two sorted subarrays A[p..q] and A[q+1, r] for array A[p..r], we combine the results by creating a sorted array A[p..r] from two sorted subarrays A[p..q] and A[q+1, r].
+
+Example:- A={125,181,130,25,61,887}
+mid=(low+last_indx)/2. In this case:- mid =3 (taking upper bound)
+Divide the A array in two halves using the mid.
+A1={125,181,130,25}  and  A2={61,887}
+now for A1:- mid=(0+3)/2= 2
+Divide A1 further into two parts A3={125,181,130} and A4={25}
+now for A3:- mid=(0+2)/2=1
+Divide A3 further into two parts A5={125,181} and A6={130}
+now for A5:- mid=(0+1)/2=1
+Divide A5 into further into two parts A6={125} and A7={181}
+now for A2:- mid=(0+1)/2=1
+Divide A2 into two parts A8={61} and A9={887}
+Start comparing at the lowest level:-
+A8<A9 so combine them in ascending order in array as A10= {61,887}
+A6<A7 so combine theam A11={125,181}
+Now do comparing in A11 and A6:- at 0th index--> 125<130 
+                                 at 1st index-->130<181
+                                 so combine them as A12={125,130,181}
+Compare in A12 and A6:- 25<125 --> 25<130 -->25<181 so combine them as A13={25,125,130,181}.
+Compare in A13 and A10:- 25<61 -->25<887, 61<125 --> 61<130 --> 61<181, 125<887 --> 130<887 --> 181<887.
+Combine array as Array:- {25,61,125,130,181,887}
+so sorted array is :- {25,61,125,130,181,887}
+*/
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class MergeSort {
+    void merge(int array[], int p, int q, int r) {
+
+        int n1 = q - p + 1;
+        int n2 = r - q;
+
+        int L[] = new int[n1];
+        int M[] = new int[n2];
+
+        for (int i = 0; i < n1; i++)
+            L[i] = array[p + i];
+        for (int j = 0; j < n2; j++)
+            M[j] = array[q + 1 + j];
+
+        int i, j, k;
+        i = 0;
+        j = 0;
+        k = p;
+
+
+        while (i < n1 && j < n2) {
+            if (L[i] <= M[j]) {
+                array[k] = L[i];
+                i++;
+            } else {
+                array[k] = M[j];
+                j++;
+            }
+            k++;
+        }
+
+
+        while (i < n1) {
+            array[k] = L[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            array[k] = M[j];
+            j++;
+            k++;
+        }
+    }
+
+    void mergeSort(int array[], int left, int right) {
+        if (left < right) {
+
+            int mid = (left + right) / 2;
+            mergeSort(array, left, mid);
+            mergeSort(array, mid + 1, right);
+            merge(array, left, mid, right);
+        }
+    }
+
+    public static void main(String args[]) {
+        MergeSort ob = new MergeSort();
+        System.out.println("Enter the size of array");
+        Scanner s=new Scanner(System.in);
+        int size=s.nextInt();
+        int [] array=new int[size];
+        for(int i=0;i<size;i++){
+            System.out.println("enter "+i+"th element");
+            array[i]=s.nextInt();
+        }
+        ob.mergeSort(array, 0, array.length - 1);
+        System.out.println(Arrays.toString(array));
+    }
+}
+
+
