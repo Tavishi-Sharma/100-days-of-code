@@ -1,0 +1,48 @@
+/*
+In this kata you have to create all permutations of a non empty input string and remove duplicates, if present. This means, you have to shuffle all letters from the input in all possible orders.
+
+Examples:
+
+* With input 'a'
+* Your function should return: ['a']
+* With input 'ab'
+* Your function should return ['ab', 'ba']
+* With input 'aabb'
+* Your function should return ['aabb', 'abab', 'abba', 'baab', 'baba', 'bbaa']
+The order of the permutations doesn't matter.
+
+Sample test case 1:-abcd
+Output:-{"abcd", "abdc", "acbd", "acdb", "adbc", "adcb", "bacd", "badc", "bcad", "bcda", "bdac", "bdca","cabd", "cadb", "cbad", "cbda", "cdab", "cdba", "dabc", "dacb", "dbac", "dbca", "dcab", "dcba"}
+
+Sample test case 2:-aaaaab
+Output:-{"aaaaab", "aaaaba", "aaabaa", "aabaaa", "abaaaa", "baaaaa"}
+
+*/
+class Permutations {
+    
+    public static List<String> singlePermutations(String s) {
+        StringBuilder sb   = new StringBuilder();
+            Set<String>   ans  = new HashSet<>();
+            Set<Integer>  used = new HashSet<>();
+            DFS(s, used, sb, ans);
+            return new ArrayList<String>(ans);
+        }
+        
+        private static void DFS(String s, Set<Integer> used, StringBuilder sb, Set<String> ans) {
+            
+            if (sb.length() == s.length()) {
+                ans.add(sb.toString());
+                
+            } else {
+                for (int x=0 ; x < s.length() ; x++) {
+                    if (!used.contains(x)) {
+                        sb.append(s.charAt(x));
+                        used.add(x);
+                        DFS(s, used, sb, ans);
+                        used.remove(x);
+                        sb.deleteCharAt(sb.length()-1);
+                    }
+                }
+            }
+        }
+    }
