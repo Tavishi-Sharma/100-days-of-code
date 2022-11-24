@@ -11,10 +11,10 @@ Output:- {{1,2,3},{8,9,4},{7,6,5}}
 7    6    5    
 
 Sample test case 2:- N=0
-Output:-error!
+Output:-[[]]
 
 Sample test case 3:- N=-1
-Output:-error!
+Output:-[[]]
 */
 public class TheClockwiseSpiral {
 
