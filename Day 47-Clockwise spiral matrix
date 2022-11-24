@@ -1,0 +1,48 @@
+/*
+Create a function that takes N an integer as an arguement and return NxN matrix with number 1 through NxN represented as clockwise spiral.
+
+Example: N=2
+Array={{1,2},{4,3}}
+
+Sample test case 1:- N=3
+Output:- {{1,2,3},{8,9,4},{7,6,5}}
+1    2    3    
+8    9    4    
+7    6    5    
+
+Sample test case 2:- N=0
+Output:-error!
+
+Sample test case 3:- N=-1
+Output:-error!
+*/
+public class TheClockwiseSpiral {
+
+    public static int[][] createSpiral(int N) {
+        int [][] array=new int[N][N];
+      int counter=1,startrow=0,endrow=N-1,startcol=0,endcol=N-1;   //initialization of counters
+      while(startcol<=endcol && startrow<=endrow){
+        for(int i=startcol;i<=endcol;i++){    //to fill the first row
+          array[startrow][i]=counter;
+          counter++;
+        }
+        startrow++;
+        for(int j=startrow;j<=endrow;j++){      //to fill the last column
+          array[j][endcol]=counter;
+          counter++;
+        }
+        endcol--;
+        for(int i=endcol;i>=startcol;i--){      //to fill the first column
+          array[endrow][i]=counter;
+          counter++;
+        }
+        endrow--;
+        for(int j=endrow;j>=startrow;j--){     //to fill the next row
+          array[j][startcol]=counter;
+          counter++;
+        }
+        startcol++;
+      }
+      return array;
+    }
+}
