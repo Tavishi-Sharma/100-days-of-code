@@ -32,12 +32,12 @@ public class TheClockwiseSpiral {
           counter++;
         }
         endcol--;
-        for(int i=endcol;i>=startcol;i--){      //to fill the first column
+        for(int i=endcol;i>=startcol;i--){      //to fill the last row
           array[endrow][i]=counter;
           counter++;
         }
         endrow--;
-        for(int j=endrow;j>=startrow;j--){     //to fill the next row
+        for(int j=endrow;j>=startrow;j--){     //to fill the first column
           array[j][startcol]=counter;
           counter++;
         }
