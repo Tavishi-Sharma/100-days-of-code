@@ -1,0 +1,60 @@
+/*
+Implement a function which receives two arguments:
+
+the sum of digits (sum)
+the number of digits (count)
+This function should return three values:
+
+the total number of values which have count digits that add up to sum and are in increasing order
+the lowest such value
+the greatest such value
+Note: if there're no values which satisfy these constaints, you should return an empty value (refer to the examples to see what exactly is expected).
+
+Examples
+// The output type is List<Long>
+HowManyNumbers.findAll(10, 3) 
+[118, 127, 136, 145, 226, 235, 244, 334]=>  [8, 118, 334]
+
+Sample Test Case 1:- HowManyNumbers.findAll(27, 3) 
+Output:- [1, 999, 999]
+Sample Test Case 2:- HowManyNumbers.findAll(84, 4) 
+Output:- []
+
+*/
+import java.util.*;
+public class HowManyNumbers {
+    private static long count;
+    private static long min;
+    private static long max;
+
+    public static List<Long> findAll(final int sumDigits, final int numDigits) {
+        count = 0;
+        min = 0;
+        max = 0;
+
+        recursiveSearch(0L, 1, sumDigits, numDigits);
+
+        ArrayList<Long> result = new ArrayList<>();
+
+        if (count > 0) {
+            result.add(count);
+            result.add(min);
+            result.add(max);
+        }
+
+        return result;
+    }
+
+    private static void recursiveSearch(Long currNum, int prevDigit, int sumLeft, int digitsLeft) {
+        if (sumLeft == 0 && digitsLeft == 0) {
+            if (count == 0) min = currNum;
+            min = min < currNum ? min : currNum;
+            max = max > currNum ? max : currNum;
+            count++;
+        } else if (digitsLeft != 0) {
+            for (int i = prevDigit; i < 10; i++) {
+                recursiveSearch(10 * currNum + i, i,sumLeft - i, digitsLeft - 1);
+            }
+        }
+    }
+  }
