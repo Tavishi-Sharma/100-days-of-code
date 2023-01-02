@@ -1,0 +1,57 @@
+/* Complete the solution so that it strips all text that follows any of a set of comment markers passed in. Any whitespace at the end of the line should also be stripped out.
+
+Example:
+
+Given an input string of:
+
+apples, pears # and bananas
+grapes
+bananas !apples
+
+The output expected would be:
+apples, pears
+grapes
+bananas
+
+Sample test Case 1:- solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"])
+Output:-apples, pears
+        grapes
+        bananas
+
+Sample test Case 2:- solution("a #b\nc\nd $e f g",["#", "$"])
+Output:- a
+         b
+         c
+         d
+         e
+         f g
+*/
+
+public class StripComments {
+
+	//Strip Comments
+	public static String stripComments(String text, String[] commentSymbols) {
+
+		String[] textByLine = text.split("\n");   //spliting the string at "\n"
+
+		for (int i = 0; i < textByLine.length; i++) {
+			for (String symbol : commentSymbols) {
+				int symbolIndex = textByLine[i].indexOf(symbol);
+				if (symbolIndex != -1) 
+					textByLine[i] = textByLine[i].substring(0, symbolIndex);
+			}
+		}
+
+		return generateTextFromLines(textByLine);
+	}
+
+	private static String generateTextFromLines(String[] textByLine) {
+
+		String result = "";
+		for (String line : textByLine) 
+			result += line.replaceAll("\\s+$","") + '\n';
+
+		return result.substring(0,result.length() - 1);
+	}
+	
+}
