@@ -1,0 +1,65 @@
+/*
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+
+Write the code that will take a string and make this conversion given a number of rows:
+
+string convert(string s, int numRows);
+
+Sample test case 1:-
+Input: s = "PAYPALISHIRING", numRows = 3
+Output: "PAHNAPLSIIGYIR"
+
+Sample test case 2:-
+Input: s = "PAYPALISHIRING", numRows = 4
+Output: "PINALSIGYAHRPI"
+
+Sample test case 3:-
+Input: s = "A", numRows = 1
+Output: "A"
+
+Constraints:
+
+a) 1 <= s.length <= 1000
+b) s consists of English letters (lower-case and upper-case), ',' and '.'.
+c) 1 <= numRows <= 1000
+*/
+
+class Solution {
+    public String convert(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
+        
+        StringBuilder answer = new StringBuilder();
+        int n = s.length();
+        int charsInSection = 2 * (numRows - 1);
+        
+        for (int currRow = 0; currRow < numRows; ++currRow) {
+            int index = currRow;
+
+            while (index < n) {
+                answer.append(s.charAt(index));
+
+                // If currRow is not the first or last row
+                // then we have to add one more character of current section.
+                if (currRow != 0 && currRow != numRows - 1) {
+                    int charsInBetween = charsInSection - 2 * currRow;
+                    int secondIndex = index + charsInBetween;
+                    
+                    if (secondIndex < n) {
+                        answer.append(s.charAt(secondIndex));
+                    }
+                }
+                // Jump to same row's first character of next section.
+                index += charsInSection;
+            }
+        }
+        
+        return answer.toString();
+    }
+}
