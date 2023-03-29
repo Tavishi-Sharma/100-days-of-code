@@ -1,0 +1,101 @@
+/*
+Given a string S. The task is to count the number of substrings which contains equal number of lowercase and uppercase letters. 
+
+Example 1:
+
+Input:
+S = "gEEk"
+Output: 3
+Explanation: There are 3 substrings of
+the given string which satisfy the
+condition. They are "gE", "gEEk" and "Ek".
+Example 2:
+
+Input:
+S = "WomensDAY"
+Output: 4
+Explanation: There are 4 substrings of 
+the given string which satisfy the
+condition. They are "Wo", "ensDAY", 
+"nsDA" and "sD"
+Your Task:
+The task is to complete the function countSubstring() which takes the string S as input parameter and returns the number of substrings which contains equal number of uppercase and lowercase letters.
+
+Expected Time Complexity: O(N*N)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 ≤ |S| ≤ 103
+*/
+//{ Driver Code Starts
+//Initial Template for Java
+import java.io.*;
+import java.util.*; 
+class GFG{
+    public static void main(String args[]) throws IOException { 
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine());
+        
+        while(t-- > 0){
+            String S = read.readLine().trim();
+            Solution ob = new Solution();
+            int ans = ob.countSubstring(S);
+            System.out.println(ans);
+        }
+    } 
+} 
+// } Driver Code Ends
+
+
+//User function Template for Java
+class Solution 
+{ 
+    int countSubstring(String S) 
+    {HashMap<Integer, Integer> prevSum = new HashMap<>();
+ 
+    // Stores the count of substrings
+    // having equal number of lowercase
+    // and uppercase characters
+    int res = 0;
+ 
+    // Stores the sum obtained so far
+    int currentSum = 0;
+ 
+    for(int i = 0; i < S.length(); i++)
+    {
+         
+        // If the character is uppercase
+        if (S.charAt(i) >= 'A' && S.charAt(i) <= 'Z')
+        {
+            currentSum++;
+        }
+ 
+        // Otherwise
+        else
+            currentSum--;
+ 
+        // If currsum is 0
+        if (currentSum == 0)
+            res++;
+ 
+        // If the current sum exists in
+        // the HashMap prevSum
+        if (prevSum.containsKey(currentSum))
+        {
+             
+            // Increment the resultant
+            // count by 1
+            res += prevSum.get(currentSum);
+        }
+ 
+        // Update the frequency of the
+        // current sum by 1
+        prevSum.put(currentSum,
+                    prevSum.getOrDefault(currentSum, 0) + 1);
+    }
+ 
+    // Return the resultant count of
+    // the subarrays
+    return res;
+    }
+} 
